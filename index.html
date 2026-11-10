@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aziz Retina &amp; Healthcare Center – HMIS</title>
+<style>
+:root{--bg:#e8f1f2;--bg2:#d4e6e8;--card:rgba(255,255,255,.62);--bd:rgba(255,255,255,.8);--tx:#12303a;--mu:#5b7a83;--ac:#0b7a75;--ac2:#14a39b;--dn:#c8453b;--wn:#d99a1e;--ok:#2a9d5c;--sh:8px 8px 20px rgba(11,70,80,.14),-6px -6px 16px rgba(255,255,255,.85)}
+:root[data-t=dark]{--bg:#0e1b20;--bg2:#13262d;--card:rgba(28,48,56,.62);--bd:rgba(255,255,255,.09);--tx:#e3f1f2;--mu:#8fb0b6;--ac:#2fc4b8;--ac2:#1d8f86;--sh:8px 8px 20px rgba(0,0,0,.45),-4px -4px 14px rgba(60,100,110,.12)}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:Segoe UI,system-ui,Roboto,sans-serif;color:var(--tx);background:linear-gradient(135deg,var(--bg),var(--bg2));padding-top:env(safe-area-inset-top);font-size:15px}
+.urdu{font-family:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq',serif}
+#app{display:flex;min-height:100%}
+aside{width:230px;padding:16px 12px;position:sticky;top:0;height:100vh;overflow:auto;background:var(--card);backdrop-filter:blur(16px);border-right:1px solid var(--bd);flex-shrink:0;z-index:30;transition:.25s}
+aside .brand{display:flex;gap:10px;align-items:center;margin-bottom:14px}
+aside .brand img{width:42px;height:42px;object-fit:contain;border-radius:10px;background:#fff}
+aside .brand b{font-size:13px;line-height:1.2}
+.nv{display:flex;gap:10px;align-items:center;padding:11px 12px;border-radius:12px;cursor:pointer;margin-bottom:4px;color:var(--tx);font-weight:500}
+.nv:hover{box-shadow:var(--sh);transform:translateY(-1px)}
+.nv.on{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;box-shadow:0 6px 16px rgba(11,122,117,.4)}
+main{flex:1;min-width:0;padding:18px;padding-bottom:40px}
+.top{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+.top h1{font-size:22px;flex:1}
+#burger{display:none}
+.card{background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--bd);border-radius:18px;box-shadow:var(--sh);padding:16px;margin-bottom:16px;transition:.2s}
+.card:hover{transform:translateY(-2px)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.stat b{display:block;font-size:26px;color:var(--ac)}
+.stat span{color:var(--mu);font-size:13px}
+button,.btn{font:inherit;border-radius:12px;padding:9px 14px;cursor:pointer;background:var(--card);color:var(--tx);box-shadow:var(--sh);transition:.15s;border:1px solid var(--bd)}
+button:hover{transform:translateY(-2px)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+.p{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border:0}
+.d{background:var(--dn);color:#fff;border:0}
+.sm{padding:5px 9px;font-size:12.5px;border-radius:9px}
+input,select,textarea{font:inherit;width:100%;padding:9px 11px;border-radius:11px;border:1px solid var(--bd);background:rgba(255,255,255,.5);color:var(--tx);box-shadow:inset 3px 3px 7px rgba(11,70,80,.1),inset -3px -3px 7px rgba(255,255,255,.5)}
+:root[data-t=dark] input,:root[data-t=dark] select,:root[data-t=dark] textarea{background:rgba(0,0,0,.25);box-shadow:inset 2px 2px 6px rgba(0,0,0,.4)}
+label{font-size:12.5px;color:var(--mu);display:block;margin:8px 0 3px}
+.f{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.ck{display:flex;flex-wrap:wrap;gap:8px}
+.ck label{display:flex;align-items:center;gap:5px;margin:0;color:var(--tx);background:var(--card);padding:5px 10px;border-radius:20px;border:1px solid var(--bd);cursor:pointer}
+.ck input{width:auto;box-shadow:none}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;color:var(--mu);font-weight:600;padding:8px;white-space:nowrap}
+td{padding:8px;border-top:1px solid var(--bd);vertical-align:middle}
+.tg{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;background:var(--bg2);margin:1px;color:var(--tx)}
+.tg.r{background:#f9d6d2;color:#8a2119}.tg.g{background:#cdeedb;color:#16603a}.tg.y{background:#fbe8b8;color:#6d4b05}.tg.b{background:#cfe4f7;color:#124a7c}
+.mo{position:fixed;inset:0;background:rgba(5,25,30,.55);backdrop-filter:blur(4px);z-index:60;display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:14px}
+.mo.on{display:flex}
+.mb{background:var(--bg);border-radius:20px;padding:18px;width:100%;max-width:820px;box-shadow:var(--sh);border:1px solid var(--bd);margin:auto}
+.mb h2{margin-bottom:8px;font-size:19px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ph{width:64px;height:64px;border-radius:50%;object-fit:cover;background:var(--bg2)}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ac);color:#fff;padding:10px 18px;border-radius:30px;z-index:99;display:none;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.bars{display:flex;gap:8px;align-items:flex-end;height:120px}
+.bars div{flex:1;background:linear-gradient(var(--ac2),var(--ac));border-radius:8px 8px 0 0;min-height:3px;position:relative}
+.bars small{position:absolute;bottom:-18px;left:0;right:0;text-align:center;font-size:10px;color:var(--mu)}
+#pa{display:none}
+.slip{width:190mm;font-family:Arial,sans-serif;color:#000;font-size:12px}
+.slip .h{text-align:center;border-bottom:2px solid #0b7a75;padding-bottom:6px;margin-bottom:8px}
+.slip .h img{height:50px}.slip .h h2{font-size:20px;color:#0b7a75}
+.slip table td,.slip table th{border:1px solid #999;padding:4px 6px;color:#000}
+.slip .bx{border:1px solid #999;padding:6px;margin:6px 0;min-height:30px}
+@media(max-width:820px){
+ aside{position:fixed;left:-250px;top:0;width:240px;box-shadow:var(--sh)}
+ aside.on{left:0}
+ #burger{display:inline-block}
+ main{padding:12px}
+ .top h1{font-size:18px}
+ .mo{padding:6px}.mb{padding:12px}
+}
+@media print{
+ @page{size:A4;margin:10mm}
+ body{background:#fff}
+ #app,.mo,#toast{display:none!important}
+ #pa{display:block!important}
+ .slip{width:100%;page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div id="app">
+ <aside id="sd"></aside>
+ <main>
+  <div class="top">
+   <button id="burger" onclick="sd.classList.toggle('on')">☰</button>
+   <h1 id="ttl"></h1>
+   <select id="role" style="width:auto" onchange="setRole(this.value)"><option>Admin</option><option>Doctor</option><option>Receptionist</option><option>Pharmacist</option><option>Lab Tech</option></select>
+   <span id="cl" class="tg" style="display:none"></span><button onclick="toggleLang()">اردو/EN</button>
+   <button onclick="toggleTheme()">🌓</button>
+  </div>
+  <div id="view"></div>
+ </main>
+</div>
+<div class="mo" id="mo"><div class="mb" id="mb"></div></div>
+<div id="pa"></div>
+<div id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const K='clinic_hmis_v1';
+const defDB=()=>({patients:[],appts:[],visits:[],bills:[],meds:[],ipd:[],expenses:[],audit:[],
+ set:{name:'Aziz Retina & Healthcare Center',doc:'Dr. Nadeem Ahmad',qual:'MBBS, DOMS, FCPS & Fellowship in Vitreo Retina',addr:'Ghous-E-Azam Road Near Chungi No. 1 Multan',phone:'03006304234',logo:'',mrn:60202578,fee:1000},
+ last:0,role:'Admin',theme:'light',lang:'en'});
+let DB;
+try{DB=JSON.parse(localStorage.getItem(K))||defDB()}catch(e){DB=defDB()}
+DB.ipd=DB.ipd||[];
+const save=()=>{stamp();try{localStorage.setItem(K,JSON.stringify(DB))}catch(e){toast('Storage is full. Remove some attachments.')}if(CL.ready)pushSoon()};
+const log=a=>{DB.audit.unshift({t:new Date().toISOString(),role:DB.role,a});DB.audit=DB.audit.slice(0,300)};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const today=()=>new Date().toISOString().slice(0,10);
+const fmt=n=>'Rs '+(+n||0).toLocaleString();
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const toast=m=>{const t=$('#toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2600)};
+const pat=id=>DB.patients.find(p=>p.id===id)||{};
+
+/* ---------- navigation ---------- */
+const NAV=[['dash','🏠','Dashboard','ڈیش بورڈ',['Admin','Doctor','Receptionist','Pharmacist','Lab Tech']],
+['pat','👤','Patients','مریض',['Admin','Doctor','Receptionist']],
+['queue','⏱','Waiting Queue','قطار',['Admin','Doctor','Receptionist']],
+['appt','📅','Appointments','اپائنٹمنٹ',['Admin','Doctor','Receptionist']],
+['emr','🩺','Consultations','معائنہ',['Admin','Doctor']],
+['ipd','🛏','IPD Admissions','داخلہ',['Admin','Doctor','Receptionist']],
+['bill','💳','Billing','بلنگ',['Admin','Receptionist']],
+['pharm','💊','Pharmacy','فارمیسی',['Admin','Pharmacist']],
+['exp','📉','Expenses & P/L','اخراجات',['Admin']],
+['set','⚙️','Settings & Backup','سیٹنگز',['Admin']]];
+let cur='dash',q='';
+function nav(v){cur=v;q='';sd.classList.remove('on');render()}
+function setRole(r){DB.role=r;save();const ok=NAV.filter(n=>n[4].includes(r));if(!ok.find(n=>n[0]===cur))cur=ok[0][0];render()}
+function toggleTheme(){DB.theme=DB.theme=='dark'?'light':'dark';save();applyT()}
+function toggleLang(){DB.lang=DB.lang=='en'?'ur':'en';save();render()}
+function applyT(){document.documentElement.dataset.t=DB.theme}
+const ur=()=>DB.lang=='ur';
+
+function render(){
+ applyT();$('#role').value=DB.role;
+ document.body.classList.toggle('urdu',ur());
+ const s=DB.set;
+ sd.innerHTML=`<div class="brand">${s.logo?`<img src="${s.logo}">`:'<div style="font-size:32px">👁️</div>'}<b>${esc(s.name)}</b></div>`+
+  NAV.filter(n=>n[4].includes(DB.role)).map(n=>`<div class="nv ${cur==n[0]?'on':''}" onclick="nav('${n[0]}')"><span>${n[1]}</span>${ur()?n[3]:n[2]}</div>`).join('');
+ const n=NAV.find(x=>x[0]==cur);$('#ttl').textContent=ur()?n[3]:n[2];
+ $('#view').innerHTML=V[cur]();
+ if(cur=='queue'&&!window._qi)window._qi=setInterval(()=>{if(cur=='queue'&&!$('#mo').classList.contains('on'))$('#view').innerHTML=V.queue()},30000);
+}
+
+/* ---------- modal ---------- */
+function openM(h){$('#mb').innerHTML=h;$('#mo').classList.add('on')}
+function closeM(){stopCam();$('#mo').classList.remove('on')}
+$('#mo').addEventListener('mousedown',e=>{if(e.target.id=='mo')closeM()});
+
+/* ---------- views ---------- */
+const V={};
+V.dash=()=>{
+ const t=today(),vt=DB.bills.filter(b=>b.date==t);
+ const rev=vt.reduce((a,b)=>a+b.paid,0),due=DB.bills.reduce((a,b)=>a+(b.total-b.paid),0);
+ const days=[...Array(7)].map((_,i)=>{const d=new Date(Date.now()-(6-i)*864e5).toISOString().slice(0,10);return[d.slice(5),DB.bills.filter(b=>b.date==d).reduce((a,b)=>a+b.paid,0)]});
+ const mx=Math.max(1,...days.map(d=>d[1]));
+ const low=DB.meds.filter(m=>m.qty<=m.min),exp=DB.meds.filter(m=>m.exp&&(new Date(m.exp)-Date.now())/864e5<60);
+ const days3=!CL.user&&(Date.now()-DB.last)/864e5>3;
+ return `${days3?`<div class="card" style="border-color:var(--wn)">⚠️ ${DB.last?'More than 3 days have passed since your last backup.':'No backup has been taken yet.'} <button class="sm p" onclick="backup()">Download backup</button></div>`:''}
+ <div class="grid">
+ <div class="card stat"><b>${DB.patients.length}</b><span>Total patients</span></div>
+ <div class="card stat"><b>${DB.patients.filter(p=>p.visitDate==t).length}</b><span>Today's check-ins</span></div>
+ <div class="card stat"><b>${DB.appts.filter(a=>a.date==t).length}</b><span>Today's appointments</span></div>
+ <div class="card stat"><b>${DB.ipd.filter(a=>a.status=='Admitted').length}</b><span>Admitted now</span></div>
+ <div class="card stat"><b>${fmt(rev)}</b><span>Today's collection</span></div>
+ <div class="card stat"><b>${fmt(due)}</b><span>Total dues</span></div></div>
+ <div class="card"><b>Revenue – last 7 days</b><div class="bars" style="margin:14px 0 24px">${days.map(d=>`<div style="height:${d[1]/mx*100}%"><small>${d[0]}</small></div>`).join('')}</div></div>
+ <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+ <div class="card"><b>Low stock</b><br>${low.map(m=>`<span class="tg r">${esc(m.name)} (${m.qty})</span>`).join('')||'<small>All stock levels are fine</small>'}</div>
+ <div class="card"><b>Expiring within 60 days</b><br>${exp.map(m=>`<span class="tg y">${esc(m.name)} ${m.exp}</span>`).join('')||'<small>None</small>'}</div></div>
+ <div class="card"><b>Audit log (latest)</b><div class="tw"><table>${DB.audit.slice(0,8).map(a=>`<tr><td>${new Date(a.t).toLocaleString()}</td><td>${a.role}</td><td>${esc(a.a)}</td></tr>`).join('')}</table></div></div>`;
+};
+
+V.pat=()=>{
+ const l=DB.patients.filter(p=>!p.arch&&(!q||[p.name,p.phone,p.mrn].join(' ').toLowerCase().includes(q.toLowerCase())));
+ return `<div class="card"><div class="row"><input id="sq" placeholder="Search name / phone / MRN" value="${esc(q)}" oninput="q=this.value;V_s()" style="flex:1;min-width:180px"><button class="p" onclick="patForm()">+ New Patient</button></div></div>
+ <div class="card tw"><table><tr><th></th><th>MRN</th><th>Name</th><th>Age/Sex</th><th>Phone</th><th>Tags</th><th></th></tr>
+ ${l.map(p=>`<tr><td>${p.photo?`<img class="ph" style="width:38px;height:38px" src="${p.photo}">`:'👤'}</td><td><b>${p.mrn}</b></td><td>${esc(p.name)}</td><td>${p.age}/${p.gender[0]}</td><td>${esc(p.phone)}</td>
+ <td>${p.tag!='Regular'?`<span class="tg y">${p.tag}</span>`:''}${(p.chronic||[]).map(c=>`<span class="tg b">${c}</span>`).join('')}${p.allergy?`<span class="tg r">⚠ ${esc(p.allergy)}</span>`:''}</td>
+ <td style="white-space:nowrap"><button class="sm" onclick="emrForm('${p.id}')">Visit</button> <button class="sm" onclick="billForm('${p.id}')">Bill</button> <button class="sm" onclick="admForm('${p.id}')">Admit</button> <button class="sm" onclick="slip('${p.id}')">Slip</button> <button class="sm" onclick="hist('${p.id}')">History</button> <button class="sm" onclick="patForm('${p.id}')">Edit</button></td></tr>`).join('')||'<tr><td colspan=7>No patients found. Click "+ New Patient" to register one.</td></tr>'}</table></div>`;
+};
+function V_s(){const p=$('#sq').selectionStart;$('#view').innerHTML=V.pat();const e=$('#sq');e.focus();e.setSelectionRange(p,p)}
+
+let camStream=null,tmpPhoto='',tmpDocs=[];
+function stopCam(){if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null}}
+const CH=['DM','HTN','CKD','Asthma','IHD','Hep B/C','HIV'];
+function patForm(id){
+ const p=DB.patients.find(x=>x.id==id)||{chronic:[],gender:'Male',tag:'Regular',visitType:'Fresh'};
+ tmpPhoto=p.photo||'';tmpDocs=p.docs||[];
+ openM(`<h2>${id?'Edit':'New'} Patient ${id?p.mrn:''}</h2>
+ <div class="f"><div><label>Name *</label><input id="n" value="${esc(p.name)}"></div>
+ <div><label>Age *</label><input id="a" type="number" min="0" max="120" value="${p.age||''}"></div>
+ <div><label>Gender</label><select id="g">${['Male','Female','Other'].map(x=>`<option ${p.gender==x?'selected':''}>${x}</option>`)}</select></div>
+ <div><label>Phone * (03XXXXXXXXX)</label><input id="ph" inputmode="numeric" maxlength="11" value="${esc(p.phone)}"></div>
+ <div><label>Address</label><input id="ad" value="${esc(p.addr)}"></div>
+ <div><label>Guardian / Attendant</label><input id="gn" value="${esc(p.gname)}"></div>
+ <div><label>Guardian phone</label><input id="gp" inputmode="numeric" value="${esc(p.gphone)}"></div>
+ <div><label>Emergency contact (name & phone)</label><input id="ec" value="${esc(p.emerg)}"></div>
+ <div><label>Allergy</label><input id="al" value="${esc(p.allergy)}"></div>
+ <div><label>Category</label><select id="tg">${['Regular','VIP','Emergency'].map(x=>`<option ${p.tag==x?'selected':''}>${x}</option>`)}</select></div>
+ <div><label>Visit type</label><select id="vt"><option ${p.visitType=='Fresh'?'selected':''} value="Fresh">Fresh Check-in</option><option ${p.visitType=='Follow-up'?'selected':''} value="Follow-up">Follow-up</option></select></div>
+ <div><label>Referral source</label><select id="rf">${['Walk-in','Social media','Doctor','Word of mouth'].map(x=>`<option ${p.ref==x?'selected':''}>${x}</option>`)}</select></div>
+ <div><label>Family linked (MRN)</label><input id="fm" value="${esc(p.family)}"></div></div>
+ <label>Chronic illness</label><div class="ck">${CH.map(c=>`<label><input type="checkbox" class="chr" value="${c}" ${(p.chronic||[]).includes(c)?'checked':''}>${c}</label>`).join('')}</div>
+ <label>Reception notes</label><textarea id="nt" rows="2">${esc(p.notes)}</textarea>
+ <label>Photo</label><div class="row"><img id="pv" class="ph" src="${tmpPhoto}" ${tmpPhoto?'':'style="display:none"'}><video id="vid" autoplay playsinline style="width:160px;display:none;border-radius:12px"></video>
+ <button onclick="startCam()">📷 Camera</button><button onclick="snap()">Capture</button><input type="file" accept="image/*" capture="user" style="width:auto" onchange="fileTo(this,d=>{tmpPhoto=d;$('#pv').src=d;$('#pv').style.display='block'},300)"></div>
+ <label>Documents (ID card / reports)</label><input type="file" accept="image/*" multiple onchange="[...this.files].forEach(f=>fileTo({files:[f]},d=>{tmpDocs.push(d);toast('Document attached')},900))">
+ <label>Signature (consent)</label><canvas id="sg" width="400" height="110" style="background:#fff;border-radius:10px;width:100%;max-width:400px;touch-action:none"></canvas> <button class="sm" onclick="sigClear()">Clear</button>
+ <div class="row" style="margin-top:14px"><button class="p" onclick="patSave('${id||''}')">Save</button><button onclick="closeM()">Cancel</button>
+ ${id?`<button class="d" onclick="patArch('${id}')">Archive</button>`:''}</div>`);
+ initSig(p.sign);
+}
+function fileTo(inp,cb,max){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.7))};im.src=r.result};r.readAsDataURL(f)}
+async function startCam(){try{camStream=await navigator.mediaDevices.getUserMedia({video:true});const v=$('#vid');v.srcObject=camStream;v.style.display='block'}catch(e){toast('Camera access denied. Please upload a photo instead.')}}
+function snap(){const v=$('#vid');if(!camStream)return toast('Start the camera first');const c=document.createElement('canvas');c.width=240;c.height=240*v.videoHeight/v.videoWidth||180;c.getContext('2d').drawImage(v,0,0,c.width,c.height);tmpPhoto=c.toDataURL('image/jpeg',.7);$('#pv').src=tmpPhoto;$('#pv').style.display='block';stopCam();v.style.display='none'}
+function initSig(d){const c=$('#sg'),x=c.getContext('2d');let dr=false;x.lineWidth=2;x.strokeStyle='#000';if(d){const i=new Image();i.onload=()=>x.drawImage(i,0,0);i.src=d}
+ const pos=e=>{const r=c.getBoundingClientRect(),t=e.touches?e.touches[0]:e;return[(t.clientX-r.left)*c.width/r.width,(t.clientY-r.top)*c.height/r.height]};
+ const s=e=>{dr=true;const[a,b]=pos(e);x.beginPath();x.moveTo(a,b);e.preventDefault()},m=e=>{if(!dr)return;const[a,b]=pos(e);x.lineTo(a,b);x.stroke();e.preventDefault()},u=()=>dr=false;
+ c.onmousedown=s;c.onmousemove=m;window.onmouseup=u;c.ontouchstart=s;c.ontouchmove=m;c.ontouchend=u}
+function sigClear(){const c=$('#sg');c.getContext('2d').clearRect(0,0,c.width,c.height)}
+function nextMrn(){let n=Math.max(+DB.set.mrn||60202578,10000000);while(DB.patients.some(p=>p.mrn==n))n++;DB.set.mrn=n+1;return n}
+function patSave(id){
+ const n=$('#n').value.trim(),ph=$('#ph').value.trim(),a=$('#a').value;
+ if(!n)return toast('Please enter the patient name');if(!a)return toast('Please enter the age');
+ if(!/^03\d{9}$/.test(ph))return toast('Phone number must be 11 digits (03XXXXXXXXX)');
+ let p=DB.patients.find(x=>x.id==id);const nw=!p;
+ if(nw){p={id:uid(),mrn:nextMrn()};DB.patients.push(p)}
+ Object.assign(p,{name:n,age:+a,gender:$('#g').value,phone:ph,addr:$('#ad').value,gname:$('#gn').value,gphone:$('#gp').value,emerg:$('#ec').value,allergy:$('#al').value,tag:$('#tg').value,visitType:$('#vt').value,ref:$('#rf').value,family:$('#fm').value,notes:$('#nt').value,
+  chronic:[...document.querySelectorAll('.chr:checked')].map(c=>c.value),photo:tmpPhoto,docs:tmpDocs,sign:$('#sg').toDataURL()});
+ if(nw){p.visitDate=today();p.checkin=Date.now();p.status='Waiting'}
+ log((nw?'Patient created ':'Patient edited ')+p.mrn);save();closeM();render();toast('Saved — MRN '+p.mrn);if(nw)setTimeout(()=>slip(p.id),300)
+}
+function patArch(id){if(!confirm('Archive this patient?'))return;pat(id).arch=true;log('Patient archived '+pat(id).mrn);save();closeM();render()}
+
+V.queue=()=>{
+ const l=DB.patients.filter(p=>p.visitDate==today()&&!p.arch).sort((a,b)=>a.checkin-b.checkin);
+ return `<div class="card"><button onclick="tv()">📺 Waiting room display</button></div><div class="card tw"><table><tr><th>#</th><th>MRN</th><th>Name</th><th>Type</th><th>Check-in</th><th>Waiting</th><th>Status</th><th></th></tr>
+ ${l.map((p,i)=>`<tr><td>${i+1}</td><td>${p.mrn}</td><td>${esc(p.name)} ${p.tag!='Regular'?`<span class="tg y">${p.tag}</span>`:''}</td><td>${p.visitType}</td><td>${new Date(p.checkin).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</td>
+ <td>${p.status=='Done'?'-':Math.floor((Date.now()-p.checkin)/6e4)+' min'}</td><td><span class="tg ${p.status=='Done'?'g':p.status=='In Consultation'?'b':'y'}">${p.status}</span></td>
+ <td>${p.status=='Waiting'?`<button class="sm" onclick="setSt('${p.id}','In Consultation')">Call</button>`:''}${p.status!='Done'?` <button class="sm" onclick="setSt('${p.id}','Done')">Check-out</button>`:''}</td></tr>`).join('')||'<tr><td colspan=8>No patients checked in today.</td></tr>'}</table></div>`;
+};
+function setSt(id,s){const p=pat(id);p.status=s;if(s=='Done')p.checkout=Date.now();log(p.mrn+' → '+s);save();render()}
+function tv(){const l=DB.patients.filter(p=>p.visitDate==today()&&p.status!='Done').sort((a,b)=>a.checkin-b.checkin),c=l.find(p=>p.status=='In Consultation');
+ openM(`<div style="text-align:center"><h2>${esc(DB.set.name)}</h2><div style="font-size:14px;color:var(--mu)">Now calling</div><div style="font-size:44px;font-weight:700;color:var(--ac)">${c?esc(c.name):'—'}</div><div style="font-size:24px">${c?'MRN '+c.mrn:''}</div><hr style="margin:12px 0;opacity:.2"><b>Waiting</b><br>${l.filter(p=>p.status=='Waiting').map(p=>`<span class="tg" style="font-size:16px">${esc(p.name)}</span>`).join('')||'None'}<br><br><button onclick="closeM()">Close</button></div>`)}
+
+V.appt=()=>{
+ const d=window._ad||today(),l=DB.appts.filter(a=>a.date==d).sort((a,b)=>a.time.localeCompare(b.time));
+ return `<div class="card row"><input type="date" value="${d}" style="width:auto" onchange="window._ad=this.value;render()"><button class="p" onclick="apptForm()">+ Book</button><button onclick="printAppts('${d}')">🖨 Print day schedule</button></div>
+ <div class="card tw"><table><tr><th>Time</th><th>Patient</th><th>Phone</th><th>Status</th><th></th></tr>${l.map(a=>{const p=pat(a.pid);return`<tr><td>${a.time}</td><td>${esc(p.name)} <small>${p.mrn}</small></td><td>${esc(p.phone)}</td><td><span class="tg ${{Completed:'g',Cancelled:'r','No-Show':'r','Checked-in':'b','In-Consultation':'b',Confirmed:'g'}[a.st]||'y'}">${a.st}</span>${a.reason?`<small> ${esc(a.reason)}</small>`:''}</td>
+ <td><select style="width:auto" onchange="apSt('${a.id}',this.value)">${['Booked','Confirmed','Checked-in','In-Consultation','Completed','Cancelled','No-Show'].map(s=>`<option ${a.st==s?'selected':''}>${s}</option>`)}</select> <button class="sm" onclick="sms('${a.id}')">SMS</button> <button class="sm" onclick="apptForm('${a.id}')">Reschedule</button></td></tr>`}).join('')||'<tr><td colspan=5>No appointments on this date.</td></tr>'}</table></div>`;
+};
+function apptForm(id){const a=DB.appts.find(x=>x.id==id)||{date:window._ad||today(),time:'10:00',pid:''};
+ openM(`<h2>${id?'Reschedule':'Book'} appointment</h2><div class="f"><div><label>Patient</label><select id="ap">${DB.patients.map(p=>`<option value="${p.id}" ${a.pid==p.id?'selected':''}>${p.mrn} – ${esc(p.name)}</option>`)}</select></div>
+ <div><label>Date</label><input type="date" id="ad" value="${a.date}"></div><div><label>Time</label><input type="time" id="at" step="600" value="${a.time}"></div>
+ <div><label>Repeat</label><select id="ar"><option value="0">None</option><option value="1">Daily ×7</option><option value="7">Weekly ×4</option></select></div></div>
+ <div class="row" style="margin-top:12px"><button class="p" onclick="apSave('${id||''}')">Save</button><button onclick="closeM()">Cancel</button></div>`)}
+function apSave(id){const pid=$('#ap').value,date=$('#ad').value,time=$('#at').value;if(!pid||!date||!time)return toast('Patient, date and time are required');
+ const lunch=time>='13:00'&&time<'14:00';if(lunch&&!confirm('This is the lunch break (1–2 PM). Book anyway?'))return;
+ if(DB.appts.some(a=>a.id!=id&&a.date==date&&a.time==time&&!['Cancelled','No-Show'].includes(a.st)))return toast('This slot is already booked');
+ if(id){Object.assign(DB.appts.find(a=>a.id==id),{date,time})}
+ else{const r=+$('#ar').value,n=r==0?1:r==1?7:4;for(let i=0;i<n;i++){const d=new Date(date);d.setDate(d.getDate()+i*(r||0));DB.appts.push({id:uid(),pid,date:d.toISOString().slice(0,10),time,st:'Booked'})}}
+ log('Appointment saved');save();closeM();render()}
+function apSt(id,s){const a=DB.appts.find(x=>x.id==id);if(s=='Cancelled'){const r=prompt('Cancellation reason (required)');if(!r)return render();a.reason=r}a.st=s;
+ if(s=='Checked-in'){const p=pat(a.pid);p.visitDate=today();p.checkin=Date.now();p.status='Waiting';toast('🔔 '+p.name+' has arrived at reception')}log('Appt '+s);save();render()}
+function sms(id){const a=DB.appts.find(x=>x.id==id),p=pat(a.pid);openM(`<h2>SMS preview</h2><div class="card">Dear ${esc(p.name)}, your appointment at ${esc(DB.set.name)} is confirmed for ${a.date} at ${a.time}. For queries call ${DB.set.phone}.</div><button onclick="closeM()">Close</button>`);log('SMS (mock) '+p.mrn);save()}
+function printAppts(d){const l=DB.appts.filter(a=>a.date==d).sort((a,b)=>a.time.localeCompare(b.time));
+ doPrint(hdr()+`<h3>Schedule: ${d}</h3><table style="width:100%;border-collapse:collapse"><tr><th>Time</th><th>MRN</th><th>Name</th><th>Phone</th><th>Status</th></tr>${l.map(a=>{const p=pat(a.pid);return`<tr><td>${a.time}</td><td>${p.mrn}</td><td>${esc(p.name)}</td><td>${esc(p.phone)}</td><td>${a.st}</td></tr>`}).join('')}</table>`)}
+
+/* ---------- EMR ---------- */
+const COM=['DM','HTN','CKD','IHD','Asthma','Allergy','Hepatitis B/C','HIV'];
+const TPL={'Post-Op Retina Care':[['Moxifloxacin 0.5% eye drops','1 drop','QID','2 weeks'],['Prednisolone 1% eye drops','1 drop','QID taper','4 weeks'],['Tab Paracetamol 500mg','1 tab','TDS','3 days']],
+'Allergic Conjunctivitis':[['Olopatadine 0.1% eye drops','1 drop','BD','2 weeks'],['Artificial tears','1 drop','QID','1 month']],
+'General Fever':[['Tab Paracetamol 500mg','1 tab','TDS','3 days']]};
+const DDI=[['aspirin','warfarin'],['ibuprofen','aspirin'],['ciprofloxacin','antacid']];
+let rx=[];
+V.emr=()=>`<div class="card"><input placeholder="Patient search (name/MRN)" oninput="q=this.value;$('#el').innerHTML=emrList()"></div><div class="card tw" id="el">${emrList()}</div>`;
+const emrList=()=>`<table><tr><th>MRN</th><th>Name</th><th>Visits</th><th></th></tr>${DB.patients.filter(p=>!p.arch&&(!q||(p.name+p.mrn).toLowerCase().includes(q.toLowerCase()))).map(p=>`<tr><td>${p.mrn}</td><td>${esc(p.name)}</td><td>${DB.visits.filter(v=>v.pid==p.id).length}</td><td><button class="sm p" onclick="emrForm('${p.id}')">New visit</button> <button class="sm" onclick="hist('${p.id}')">History</button></td></tr>`).join('')}</table>`;
+function emrForm(pid){const p=pat(pid);rx=[];const last=DB.visits.filter(v=>v.pid==pid).pop();
+ openM(`<h2>Consultation — ${esc(p.name)} <small>${p.mrn} · ${p.age}y</small></h2>${p.allergy?`<div class="tg r">⚠ Allergy: ${esc(p.allergy)}</div>`:''}
+ <label>Chief complaint (SOAP: Subjective) <button class="sm" onclick="dict('cc')">🎤</button></label><textarea id="cc" rows="2"></textarea>
+ <div class="f"><div><label>BP</label><input id="bp" placeholder="120/80"></div><div><label>Pulse</label><input id="pu" type="number"></div><div><label>Temp °F</label><input id="tp" type="number" step=".1"></div>
+ <div><label>Weight kg</label><input id="wt" type="number" oninput="bmi()"></div><div><label>Height cm</label><input id="ht" type="number" oninput="bmi()"></div><div><label>BMI</label><input id="bm" readonly></div></div>
+ <label>Ophthalmic exam (Objective)</label><div class="f"><div><label>VA Right (V<sub>R</sub>)</label><input id="vr"></div><div><label>VA Left (V<sub>L</sub>)</label><input id="vl"></div><div><label>IOP R / L</label><input id="io"></div><div><label>Ant Seg</label><input id="as"></div><div><label>Post Seg</label><input id="ps"></div></div>
+ <label>Comorbidities</label><div class="ck">${COM.map(c=>`<label><input type="checkbox" class="cm" value="${c}" ${(p.chronic||[]).includes(c)?'checked':''}>${c}</label>`).join('')}</div>
+ <label>Diagnosis / ICD-10 (Assessment)</label><input id="dx" list="icd" placeholder="Type to search"><datalist id="icd">${ICD.map(i=>`<option value="${i}">`).join('')}</datalist>
+ <label>Procedure / minor surgery notes</label><textarea id="pr" rows="2"></textarea>
+ <label>Prescription (Plan)</label><div class="row">${Object.keys(TPL).map(k=>`<button class="sm" onclick="tpl('${k}')">${k}</button>`).join('')}${last&&last.rx?.length?`<button class="sm" onclick="rx=JSON.parse(JSON.stringify(DB.visits.find(v=>v.id=='${last.id}').rx));rxR()">Copy previous Rx</button>`:''}</div>
+ <div class="f" style="margin-top:8px"><input id="rd" list="ml" placeholder="Drug"><datalist id="ml">${DB.meds.map(m=>`<option value="${esc(m.name)}">`).join('')}</datalist><input id="rs" placeholder="Dose"><input id="rf2" placeholder="Frequency"><input id="rr" placeholder="Duration"><button onclick="rxAdd()">+ Add</button></div>
+ <div id="rxl"></div>
+ <label>Advice / long-term plan / notes</label><textarea id="adv" rows="2"></textarea>
+ <div class="f"><div><label>Follow-up date</label><input type="date" id="fu"></div><div><label>Second opinion needed</label><select id="so"><option>No</option><option>Yes</option></select></div><div><label>Clinical image (fundus/OCT)</label><input type="file" accept="image/*" onchange="fileTo(this,d=>{window._ci=d;toast('Image attached')},900)"></div></div>
+ <div class="row" style="margin-top:12px"><button class="p" onclick="emrSave('${pid}')">Save & print Rx</button><button onclick="closeM()">Cancel</button></div>`);window._ci='';rxR()}
+const ICD=['H35.0 Retinopathy background','E11.3 Diabetic retinopathy','H33.0 Retinal detachment with break','H34.1 Central retinal artery occlusion','H34.8 Retinal vein occlusion','H35.3 Macular degeneration','H25.9 Senile cataract','H40.9 Glaucoma','H10.9 Conjunctivitis','H11.0 Pterygium','H52.1 Myopia','H52.4 Presbyopia','H43.1 Vitreous haemorrhage','H04.1 Dry eye','I10 Hypertension','E11.9 Type 2 diabetes','J45.9 Asthma','R50.9 Fever'];
+function bmi(){const w=+$('#wt').value,h=+$('#ht').value/100;$('#bm').value=w&&h?(w/h/h).toFixed(1):''}
+function dict(id){const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R)return toast('Voice dictation is not supported in this browser');const r=new R();r.lang='en-US';r.onresult=e=>{$('#'+id).value+=' '+e.results[0][0].transcript};r.start();toast('Listening…')}
+function tpl(k){rx.push(...JSON.parse(JSON.stringify(TPL[k])));rxR()}
+function rxAdd(){const d=$('#rd').value.trim();if(!d)return;rx.push([d,$('#rs').value,$('#rf2').value,$('#rr').value]);['rd','rs','rf2','rr'].forEach(i=>$('#'+i).value='');rxR()}
+function rxR(){const names=rx.map(r=>r[0].toLowerCase());const w=DDI.filter(p=>p.every(x=>names.some(n=>n.includes(x))));
+ $('#rxl').innerHTML=(w.length?`<div class="tg r">⚠ Interaction: ${w.map(p=>p.join(' + ')).join(', ')}</div>`:'')+`<table>${rx.map((r,i)=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td><td><button class="sm d" onclick="rx.splice(${i},1);rxR()">✕</button></td></tr>`).join('')}</table>`}
+function emrSave(pid){const v={id:uid(),pid,date:today(),cc:$('#cc').value,bp:$('#bp').value,pu:$('#pu').value,tp:$('#tp').value,wt:$('#wt').value,ht:$('#ht').value,bmi:$('#bm').value,vr:$('#vr').value,vl:$('#vl').value,iop:$('#io').value,as:$('#as').value,ps:$('#ps').value,
+ com:[...document.querySelectorAll('.cm:checked')].map(c=>c.value),dx:$('#dx').value,proc:$('#pr').value,rx:rx.slice(),adv:$('#adv').value,fu:$('#fu').value,so:$('#so').value,img:window._ci};
+ if(!v.cc&&!v.dx)return toast('Enter a chief complaint or diagnosis');
+ DB.visits.push(v);const p=pat(pid);p.status='Done';p.checkout=Date.now();
+ if(v.fu&&!DB.appts.some(a=>a.pid==pid&&a.date==v.fu))DB.appts.push({id:uid(),pid,date:v.fu,time:'10:00',st:'Booked'});
+ log('Visit saved '+p.mrn);save();closeM();render();rxPrint(v.id)}
+function hist(pid){const p=pat(pid),vs=DB.visits.filter(v=>v.pid==pid).reverse(),bs=DB.bills.filter(b=>b.pid==pid).reverse();
+ openM(`<h2>${esc(p.name)} — ${p.mrn}</h2><div class="row"><button class="sm" onclick="wa('${pid}')">WhatsApp</button><button class="sm" onclick="caseSheet('${pid}')">Case sheet</button><button class="sm" onclick="cert('${pid}','Fit')">Fit cert</button><button class="sm" onclick="cert('${pid}','Unfit')">Unfit cert</button><button class="sm" onclick="refer('${pid}')">Referral letter</button><button onclick="closeM()">Close</button></div>
+ ${(p.docs||[]).map(d=>`<img src="${d}" style="height:60px;margin:6px 6px 0 0;border-radius:8px">`).join('')}
+ <h3 style="margin:10px 0 4px">Timeline</h3>${vs.map(v=>`<div class="card"><b>${v.date}</b> — ${esc(v.dx||v.cc)} <button class="sm" onclick="rxPrint('${v.id}')">Print Rx</button><br><small>${v.rx.map(r=>esc(r[0])).join(', ')}</small>${v.img?`<br><img src="${v.img}" style="height:70px;border-radius:8px">`:''}</div>`).join('')||'<small>No previous visits</small>'}
+ <h3>Bills</h3>${bs.map(b=>`<div>${b.date} — ${fmt(b.total)} (paid ${fmt(b.paid)})</div>`).join('')||'<small>No bills</small>'}`)}
+function wa(pid){const p=pat(pid);window.open('https://wa.me/92'+p.phone.slice(1)+'?text='+encodeURIComponent('Assalam o Alaikum '+p.name+', this is a message from '+DB.set.name+'.'),'_blank')}
+
+/* ---------- printing ---------- */
+const hdr=()=>{const s=DB.set;return`<div class="h">${s.logo?`<img src="${s.logo}"><br>`:''}<h2>${esc(s.name)}</h2><b>${esc(s.doc)}</b> (${esc(s.qual)})<br>${esc(s.addr)} | Ph: ${esc(s.phone)}</div>`};
+function doPrint(h){$('#pa').innerHTML=`<div class="slip">${h}</div>`;setTimeout(()=>window.print(),150)}
+function slip(pid){const p=pat(pid);doPrint(hdr()+`<table style="width:100%;border-collapse:collapse"><tr><td><b>MRN</b>: ${p.mrn}</td><td><b>Date</b>: ${new Date().toLocaleString()}</td><td><b>Token</b>: ${DB.patients.filter(x=>x.visitDate==today()&&x.checkin<=p.checkin).length}</td></tr>
+ <tr><td colspan=2><b>Name</b>: ${esc(p.name)} (${p.age}/${p.gender})</td><td><b>Type</b>: ${p.visitType}${p.tag!='Regular'?' / '+p.tag:''}</td></tr><tr><td><b>Phone</b>: ${esc(p.phone)}</td><td colspan=2><b>Address</b>: ${esc(p.addr)}</td></tr><tr><td colspan=3><b>Allergy</b>: ${esc(p.allergy)||'None'} &nbsp; <b>Chronic</b>: ${(p.chronic||[]).join(', ')||'—'}</td></tr></table>
+ <div class="bx"><b>Vitals</b>: BP ______ Pulse ____ Temp ____ Wt ____ Ht ____</div>
+ <table style="width:100%;border-collapse:collapse"><tr><td>V<sub>R</sub>: </td><td>V<sub>L</sub>: </td><td>IOP: </td></tr><tr><td colspan=2>Ant Seg: </td><td>Post Seg: </td></tr></table>
+ <div class="bx">Comorbidities: ${COM.map(c=>`☐ ${c}`).join(' &nbsp; ')}</div><div class="bx" style="min-height:120px"><b>Notes / Complaint</b></div>`)}
+function rxPrint(id){const v=DB.visits.find(x=>x.id==id),p=pat(v.pid);
+ doPrint(hdr()+`<p><b>${esc(p.name)}</b> | ${p.age}/${p.gender} | MRN ${p.mrn} | ${v.date}</p><div class="bx">BP ${v.bp||'-'} Pulse ${v.pu||'-'} Temp ${v.tp||'-'} Wt ${v.wt||'-'} BMI ${v.bmi||'-'}<br>V<sub>R</sub> ${v.vr||'-'} V<sub>L</sub> ${v.vl||'-'} IOP ${v.iop||'-'} | Ant: ${esc(v.as)||'-'} | Post: ${esc(v.ps)||'-'}<br>Comorbid: ${v.com.join(', ')||'-'}</div>
+ <p><b>C/C</b>: ${esc(v.cc)}</p><p><b>Dx</b>: ${esc(v.dx)}</p>${v.proc?`<p><b>Procedure</b>: ${esc(v.proc)}</p>`:''}<h3>℞</h3><table style="width:100%;border-collapse:collapse"><tr><th>Medicine</th><th>Dose</th><th>Frequency</th><th>Duration</th></tr>${v.rx.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join('')}</table>
+ <p><b>Advice</b>: ${esc(v.adv)}</p>${v.fu?`<p><b>Follow-up</b>: ${v.fu}</p>`:''}<div style="text-align:right;margin-top:30px">${esc(DB.set.doc)}<br><small>${esc(DB.set.qual)}</small></div>`)}
+function caseSheet(pid){const p=pat(pid),vs=DB.visits.filter(v=>v.pid==pid);doPrint(hdr()+`<h3>Case Sheet — ${esc(p.name)} (${p.mrn})</h3><p>Allergy: ${esc(p.allergy)||'None'} | Chronic: ${(p.chronic||[]).join(', ')||'-'}</p>${vs.map(v=>`<div class="bx"><b>${v.date}</b> ${esc(v.cc)} → ${esc(v.dx)}<br>Rx: ${v.rx.map(r=>esc(r[0])+' '+esc(r[2])).join('; ')}</div>`).join('')}`)}
+function cert(pid,t){const p=pat(pid);doPrint(hdr()+`<h3 style="text-align:center">MEDICAL ${t.toUpperCase()} CERTIFICATE</h3><p style="margin:20px 0;line-height:2">This is to certify that <b>${esc(p.name)}</b> (${p.age}y, MRN ${p.mrn}) was examined on ${today()} and is found <b>${t}</b> for duty ${t=='Unfit'?'/ requires rest for ____ days':''}.</p><div style="text-align:right;margin-top:40px">${esc(DB.set.doc)}</div>`)}
+function refer(pid){const p=pat(pid),v=DB.visits.filter(x=>x.pid==pid).pop()||{};doPrint(hdr()+`<h3>Referral Letter</h3><p>To: ____________________ Hospital</p><p style="margin:14px 0;line-height:1.8">Kindly see and manage <b>${esc(p.name)}</b> (${p.age}y/${p.gender}, MRN ${p.mrn}). Diagnosis: ${esc(v.dx)||'__________'}. Reason for referral: __________</p><div style="text-align:right;margin-top:40px">${esc(DB.set.doc)}</div>`)}
+
+/* ---------- billing ---------- */
+let items=[];
+V.bill=()=>{const l=[...DB.bills].reverse();const t=today(),tb=DB.bills.filter(b=>b.date==t),by={};tb.forEach(b=>by[b.method]=(by[b.method]||0)+b.paid);
+ return `<div class="card row"><button class="p" onclick="billForm()">+ New Bill (Ctrl+B)</button></div>
+ <div class="card"><b>Today's collection by payment method</b><br>${Object.entries(by).map(([k,v])=>`<span class="tg g">${k}: ${fmt(v)}</span>`).join('')||'<small>No payments received today</small>'}</div>
+ <div class="card tw"><table><tr><th>Date</th><th>Bill#</th><th>Patient</th><th>Total</th><th>Paid</th><th>Due</th><th></th></tr>${l.map(b=>`<tr><td>${b.date}</td><td>${b.no}</td><td>${esc(pat(b.pid).name)}</td><td>${fmt(b.total)}</td><td>${fmt(b.paid)}</td><td>${b.total-b.paid>0?`<span class="tg r">${fmt(b.total-b.paid)}</span>`:'-'}</td><td><button class="sm" onclick="billPrint('${b.id}')">Print</button> ${b.total-b.paid>0?`<button class="sm" onclick="payDue('${b.id}')">Receive</button>`:''}</td></tr>`).join('')||'<tr><td colspan=7>No bills yet.</td></tr>'}</table></div>`};
+function billForm(pid){items=[['Consultation Fee',+DB.set.fee||0]];
+ openM(`<h2>New Bill</h2><label>Patient</label><select id="bp">${DB.patients.map(p=>`<option value="${p.id}" ${p.id==pid?'selected':''}>${p.mrn} – ${esc(p.name)}</option>`)}</select>
+ <div class="f" style="margin-top:8px"><input id="bi" placeholder="Item (e.g. OCT, Injection, Lab)"><input id="bv" type="number" placeholder="Amount"><button onclick="biAdd()">+ Add</button></div><div id="bl"></div>
+ <div class="f"><div><label>Discount %</label><input id="bd" type="number" value="0" oninput="biR()"></div><div><label>Method</label><select id="bm">${['Cash','Card','Easypaisa','JazzCash','Bank Transfer'].map(x=>`<option>${x}</option>`)}</select></div><div><label>Paid</label><input id="bpd" type="number"></div><div><label>Doctor commission %</label><input id="bc" type="number" value="0"></div></div>
+ <div class="row" style="margin-top:12px"><button class="p" onclick="billSave()">Save & print</button><button onclick="closeM()">Cancel</button></div>`);biR()}
+const biTot=()=>{const s=items.reduce((a,i)=>a+i[1],0),d=+($('#bd')?.value)||0;return Math.round(s-s*d/100)};
+function biAdd(){const n=$('#bi').value,v=+$('#bv').value;if(!n||!v)return;items.push([n,v]);$('#bi').value=$('#bv').value='';biR()}
+function biR(){$('#bl').innerHTML=`<table>${items.map((i,x)=>`<tr><td>${esc(i[0])}</td><td>${fmt(i[1])}</td><td><button class="sm d" onclick="items.splice(${x},1);biR()">✕</button></td></tr>`).join('')}<tr><th>Total</th><th>${fmt(biTot())}</th></tr></table>`;if($('#bpd'))$('#bpd').value=biTot()}
+function billSave(){const t=biTot(),pd=Math.min(+$('#bpd').value||0,t),c=+$('#bc').value||0;
+ const b={id:uid(),no:'B-'+String(DB.bills.length+1).padStart(5,'0'),pid:$('#bp').value,date:today(),items:items.slice(),disc:+$('#bd').value||0,total:t,paid:pd,method:$('#bm').value,comm:Math.round(t*c/100)};
+ DB.bills.push(b);log('Bill '+b.no+' '+t);save();closeM();render();billPrint(b.id)}
+function payDue(id){const b=DB.bills.find(x=>x.id==id),a=+prompt('Amount received? (due '+(b.total-b.paid)+')');if(a>0){b.paid=Math.min(b.total,b.paid+a);log('Due received '+b.no);save();render()}}
+function billPrint(id){const b=DB.bills.find(x=>x.id==id),p=pat(b.pid);doPrint(hdr()+`<h3>Receipt ${b.no}</h3><p>${esc(p.name)} | MRN ${p.mrn} | ${b.date}</p><table style="width:100%;border-collapse:collapse">${b.items.map(i=>`<tr><td>${esc(i[0])}</td><td style="text-align:right">${fmt(i[1])}</td></tr>`).join('')}<tr><td>Discount</td><td style="text-align:right">${b.disc}%</td></tr><tr><th>Total</th><th style="text-align:right">${fmt(b.total)}</th></tr><tr><td>Paid (${b.method})</td><td style="text-align:right">${fmt(b.paid)}</td></tr><tr><td>Due</td><td style="text-align:right">${fmt(b.total-b.paid)}</td></tr></table><p style="margin-top:30px;text-align:center">Thank you. We wish you good health.</p>`)}
+
+/* ---------- pharmacy ---------- */
+V.pharm=()=>`<div class="card row"><button class="p" onclick="medForm()">+ Add medicine</button></div><div class="card tw"><table><tr><th>Name</th><th>Batch</th><th>Expiry</th><th>Qty</th><th>Min</th><th>Cost</th><th>Price</th><th></th></tr>
+ ${DB.meds.map(m=>{const ex=m.exp&&(new Date(m.exp)-Date.now())/864e5;return`<tr><td>${esc(m.name)}</td><td>${esc(m.batch)}</td><td>${m.exp||''} ${ex<0?'<span class="tg r">Expired</span>':ex<60?'<span class="tg y">Soon</span>':''}</td><td>${m.qty} ${m.qty<=m.min?'<span class="tg r">Low</span>':''}</td><td>${m.min}</td><td>${m.cost}</td><td>${m.price}</td><td><button class="sm" onclick="medForm('${m.id}')">Edit</button></td></tr>`}).join('')||'<tr><td colspan=8>No medicines in stock yet.</td></tr>'}</table></div>`;
+function medForm(id){const m=DB.meds.find(x=>x.id==id)||{};openM(`<h2>Medicine</h2><div class="f">${[['n','Name',m.name],['bt','Batch',m.batch],['ex','Expiry',m.exp,'date'],['qt','Quantity',m.qty,'number'],['mn','Reorder level',m.min??10,'number'],['co','Unit cost',m.cost,'number'],['pr','Sale price',m.price,'number'],['sp','Supplier',m.sup]].map(f=>`<div><label>${f[1]}</label><input id="m_${f[0]}" type="${f[3]||'text'}" value="${esc(f[2])}"></div>`).join('')}</div><div class="row" style="margin-top:12px"><button class="p" onclick="medSave('${id||''}')">Save</button><button onclick="closeM()">Cancel</button></div>`)}
+function medSave(id){const n=$('#m_n').value.trim();if(!n)return toast('Please enter the medicine name');let m=DB.meds.find(x=>x.id==id);if(!m){m={id:uid()};DB.meds.push(m)}
+ Object.assign(m,{name:n,batch:$('#m_bt').value,exp:$('#m_ex').value,qty:+$('#m_qt').value||0,min:+$('#m_mn').value||0,cost:+$('#m_co').value||0,price:+$('#m_pr').value||0,sup:$('#m_sp').value});log('Stock edit '+n);save();closeM();render()}
+
+/* ---------- expenses ---------- */
+V.exp=()=>{const m=today().slice(0,7),rev=DB.bills.filter(b=>b.date.startsWith(m)).reduce((a,b)=>a+b.paid,0),ex=DB.expenses.filter(e=>e.date.startsWith(m)).reduce((a,e)=>a+e.amt,0);
+ return `<div class="grid"><div class="card stat"><b>${fmt(rev)}</b><span>Revenue this month</span></div><div class="card stat"><b>${fmt(ex)}</b><span>Expenses this month</span></div><div class="card stat"><b style="color:${rev-ex<0?'var(--dn)':'var(--ok)'}">${fmt(rev-ex)}</b><span>Profit / Loss</span></div></div>
+ <div class="card f"><input id="ee" placeholder="Expense (rent, bijli, tea…)"><input id="ea" type="number" placeholder="Amount"><button class="p" onclick="exAdd()">+ Add</button></div>
+ <div class="card tw"><table>${[...DB.expenses].reverse().map(e=>`<tr><td>${e.date}</td><td>${esc(e.n)}</td><td>${fmt(e.amt)}</td></tr>`).join('')}</table></div>`};
+function exAdd(){const n=$('#ee').value,a=+$('#ea').value;if(!n||!a)return toast('Enter a name and an amount');DB.expenses.push({n,amt:a,date:today()});log('Expense '+n);save();render()}
+
+/* ---------- settings & backup ---------- */
+V.set=()=>{const s=DB.set;return cloudCard()+`<div class="card"><b>Clinic settings</b><div class="f">${[['s_n','Clinic name',s.name],['s_d','Doctor name',s.doc],['s_q','Qualifications',s.qual],['s_a','Address',s.addr],['s_p','Phone',s.phone],['s_f','Default OPD fee',s.fee,'number'],['s_m','Next MRN (min 8 digit)',s.mrn,'number']].map(f=>`<div><label>${f[1]}</label><input id="${f[0]}" type="${f[3]||'text'}" value="${esc(f[2])}"></div>`).join('')}</div>
+ <label>Clinic logo (upload your own)</label><div class="row">${s.logo?`<img src="${s.logo}" style="height:56px;background:#fff;border-radius:8px">`:''}<input type="file" accept="image/*" style="width:auto" onchange="fileTo(this,d=>{DB.set.logo=d;DB.set._u=Date.now();save();render()},300)">${s.logo?`<button class="sm" onclick="DB.set.logo='';DB.set._u=Date.now();save();render()">Remove</button>`:''}</div>
+ <br><button class="p" onclick="setSave()">Save settings</button></div>
+ <div class="card"><b>Manual backup (optional – cloud storage keeps your data safe)</b><p style="color:var(--mu);margin:6px 0">Last backup: ${DB.last?new Date(DB.last).toLocaleString():'never'}</p><div class="row"><button class="p" onclick="backup()">⬇ Download backup</button><label class="btn" style="margin:0;cursor:pointer;color:var(--tx)">⬆ Restore<input type="file" accept=".json,application/json" style="display:none" onchange="restore(this)"></label></div></div>
+ <div class="card"><button class="d" onclick="if(confirm('This will permanently delete ALL data. Download a backup first.')&&confirm('Are you absolutely sure?')){localStorage.removeItem(K);location.reload()}">Reset all data</button></div>`};
+function setSave(){const s=DB.set,m=+$('#s_m').value;if(String(m).length<8)return toast('MRN must be at least 8 digits');
+ Object.assign(s,{name:$('#s_n').value,doc:$('#s_d').value,qual:$('#s_q').value,addr:$('#s_a').value,phone:$('#s_p').value,fee:+$('#s_f').value||0});
+ if(!DB.patients.length||m>Math.max(...DB.patients.map(p=>p.mrn)))s.mrn=m;else toast('MRN cannot be lower than the MRNs of existing patients (other settings were saved)');
+ s._u=Date.now();log('Settings saved');save();render();toast('Saved')}
+function backup(){const n='CLINIC-BACKUP-'+today()+'.json';DB.last=Date.now();save();const b=new Blob([JSON.stringify(DB)],{type:'application/json'});
+ if(navigator.msSaveBlob)return navigator.msSaveBlob(b,n);const u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;document.body.appendChild(a);a.click();
+ setTimeout(()=>{URL.revokeObjectURL(u);a.remove()},1500);toast('Backup downloaded');render()}
+function restore(i){const f=i.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.patients||!d.set)throw 0;if(!confirm('Current data will be replaced. Continue?'))return;DB=Object.assign(defDB(),d);DB.ipd=DB.ipd||[];save();render();toast('Restore complete ✔')}catch(e){toast('This is not a valid backup file')}};r.readAsText(f)}
+
+/* ---------- IPD: admission & discharge ---------- */
+const WARDS=['General Ward','Semi-Private Room','Private Room','Day-care / Minor OT'];
+const WRATE={'General Ward':1500,'Semi-Private Room':3000,'Private Room':5000,'Day-care / Minor OT':2000};
+const nowL=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,16);
+const dtf=s=>s?new Date(s).toLocaleString([], {day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):'';
+const stay=a=>Math.max(1,Math.ceil(((a.dis?new Date(a.dis):new Date())-new Date(a.adm))/864e5));
+V.ipd=()=>{
+ const act=DB.ipd.filter(a=>a.status=='Admitted'),old=DB.ipd.filter(a=>a.status=='Discharged').reverse();
+ const row=(a,d)=>{const p=pat(a.pid);return`<tr><td>${a.no}</td><td>${p.mrn}</td><td>${esc(p.name)}</td><td>${esc(a.ward)} / ${esc(a.bed)||'-'}</td><td>${esc(a.dx)}</td><td>${dtf(a.adm)}</td>${d?`<td>${dtf(a.dis)}</td>`:`<td>${stay(a)}</td>`}
+ <td style="white-space:nowrap"><button class="sm" onclick="admSlip('${a.id}')">Admission slip</button> <button class="sm" onclick="ipdNotes('${a.id}')">Notes</button> ${d?`<button class="sm p" onclick="disSlip('${a.id}')">Discharge slip</button>`:`<button class="sm d" onclick="disForm('${a.id}')">Discharge</button>`}</td></tr>`};
+ return `<div class="grid">${WARDS.map(w=>`<div class="card stat"><b>${act.filter(a=>a.ward==w).length}</b><span>${w}</span></div>`).join('')}<div class="card stat"><b>${act.length}</b><span>Total admitted</span></div></div>
+ <div class="card row"><button class="p" onclick="admForm()">+ Admit Patient</button></div>
+ <div class="card tw"><b>Currently admitted</b><table><tr><th>Adm #</th><th>MRN</th><th>Patient</th><th>Ward / Bed</th><th>Diagnosis</th><th>Admitted</th><th>Days</th><th></th></tr>${act.map(a=>row(a,0)).join('')||'<tr><td colspan=8>No patients are admitted right now.</td></tr>'}</table></div>
+ <div class="card tw"><b>Discharged</b><table><tr><th>Adm #</th><th>MRN</th><th>Patient</th><th>Ward / Bed</th><th>Diagnosis</th><th>Admitted</th><th>Discharged</th><th></th></tr>${old.map(a=>row(a,1)).join('')||'<tr><td colspan=8>No discharges yet.</td></tr>'}</table></div>`};
+
+function admForm(pid){
+ openM(`<h2>Admit Patient</h2><div class="f">
+ <div><label>Patient *</label><select id="ia_p">${DB.patients.filter(p=>!p.arch).map(p=>`<option value="${p.id}" ${p.id==pid?'selected':''}>${p.mrn} – ${esc(p.name)}</option>`)}</select></div>
+ <div><label>Admission date & time</label><input type="datetime-local" id="ia_t" value="${nowL()}"></div>
+ <div><label>Ward / room type</label><select id="ia_w" onchange="$('#ia_c').value=WRATE[this.value]">${WARDS.map(w=>`<option>${w}</option>`)}</select></div>
+ <div><label>Bed / room no.</label><input id="ia_b"></div>
+ <div><label>Consultant</label><input id="ia_d" value="${esc(DB.set.doc)}"></div>
+ <div><label>Attendant name</label><input id="ia_an"></div>
+ <div><label>Attendant phone</label><input id="ia_ap" inputmode="numeric" maxlength="11"></div></div>
+ <label>Admitting diagnosis *</label><input id="ia_x" list="icd"><datalist id="icd">${ICD.map(i=>`<option value="${i}">`).join('')}</datalist>
+ <label>Planned procedure / reason for admission</label><textarea id="ia_r" rows="2" placeholder="e.g. Vitrectomy right eye, intravitreal injection"></textarea>
+ <div class="card" style="margin-top:12px"><label style="display:flex;gap:8px;align-items:center;margin:0;color:var(--tx)"><input type="checkbox" id="ia_ck" style="width:auto" onchange="$('#ia_ch').style.display=this.checked?'grid':'none'"> <b>Charge admission fees now (optional)</b></label>
+ <div class="f" id="ia_ch" style="display:none;margin-top:8px"><div><label>Admission / registration fee</label><input id="ia_f" type="number" value="0"></div><div><label>Room charge per day</label><input id="ia_c" type="number" value="${WRATE['General Ward']}"></div><div><label>Advance received</label><input id="ia_ad" type="number" value="0"></div>
+ <div><label>Payment method</label><select id="ia_m">${['Cash','Card','Easypaisa','JazzCash','Bank Transfer'].map(x=>`<option>${x}</option>`)}</select></div></div>
+ <small style="color:var(--mu)">Only the registration fee and advance are billed now. Room charges are calculated at discharge.</small></div>
+ <div class="row" style="margin-top:14px"><button class="p" onclick="admSave()">Admit & print slip</button><button onclick="closeM()">Cancel</button></div>`)}
+function admSave(){
+ const pid=$('#ia_p').value,x=$('#ia_x').value.trim();if(!pid)return toast('Register the patient first');if(!x)return toast('Enter the admitting diagnosis');
+ const ap=$('#ia_ap').value.trim();if(ap&&!/^03\d{9}$/.test(ap))return toast('Attendant phone must be 11 digits (03XXXXXXXXX)');
+ if(DB.ipd.some(a=>a.pid==pid&&a.status=='Admitted'))return toast('This patient is already admitted');
+ const a={id:uid(),no:'ADM-'+String(DB.ipd.length+1).padStart(5,'0'),pid,adm:$('#ia_t').value,ward:$('#ia_w').value,bed:$('#ia_b').value,doc:$('#ia_d').value,an:$('#ia_an').value,ap,dx:x,reason:$('#ia_r').value,status:'Admitted',notes:[],rate:+($('#ia_c').value)||WRATE[$('#ia_w').value]};
+ if($('#ia_ck').checked){const f=+$('#ia_f').value||0,adv=+$('#ia_ad').value||0;a.charged=true;a.rate=+$('#ia_c').value||0;
+  if(f>0||adv>0){const b={id:uid(),no:'B-'+String(DB.bills.length+1).padStart(5,'0'),pid,date:today(),items:[['Admission fee ('+a.no+')',f]],disc:0,total:f,paid:Math.min(adv,f)||adv,method:$('#ia_m').value,comm:0,ipd:a.id};
+   if(adv>f){b.items.push(['Advance deposit',adv-f]);b.total=adv}b.paid=adv;DB.bills.push(b);a.billId=b.id}}
+ DB.ipd.push(a);log('IPD admission '+a.no+' '+pat(pid).mrn);save();closeM();render();admSlip(a.id)}
+
+function ipdNotes(id){const a=DB.ipd.find(x=>x.id==id);
+ openM(`<h2>Progress notes – ${esc(pat(a.pid).name)} <small>${a.no}</small></h2><div class="f"><div><label>Type</label><select id="in_t"><option>Doctor round</option><option>Nursing note</option><option>Medication given</option></select></div></div>
+ <label>Note</label><textarea id="in_n" rows="3"></textarea><div class="row" style="margin-top:8px"><button class="p" onclick="noteAdd('${id}')">Add note</button><button onclick="closeM()">Close</button></div>
+ <div style="margin-top:12px">${[...(a.notes||[])].reverse().map(n=>`<div class="card"><b>${n.type}</b> <small>${dtf(n.t)} · ${n.by}</small><br>${esc(n.text)}</div>`).join('')||'<small>No notes yet.</small>'}</div>`)}
+function noteAdd(id){const a=DB.ipd.find(x=>x.id==id),t=$('#in_n').value.trim();if(!t)return toast('Write a note first');a.notes.push({t:new Date().toISOString(),type:$('#in_t').value,text:t,by:DB.role});log('IPD note '+a.no);save();ipdNotes(id)}
+
+function disForm(id){const a=DB.ipd.find(x=>x.id==id),p=pat(a.pid),d=stay({adm:a.adm,dis:nowL()});
+ openM(`<h2>Discharge – ${esc(p.name)} <small>${a.no}</small></h2><div class="f"><div><label>Discharge date & time</label><input type="datetime-local" id="id_t" value="${nowL()}"></div>
+ <div><label>Condition at discharge</label><select id="id_c">${['Improved','Stable','Recovered','Referred','LAMA','Expired'].map(x=>`<option>${x}</option>`)}</select></div><div><label>Follow-up date</label><input type="date" id="id_f"></div></div>
+ <label>Final diagnosis</label><input id="id_x" value="${esc(a.dx)}">
+ <label>Procedure performed</label><textarea id="id_p" rows="2">${esc(a.reason)}</textarea>
+ <label>Treatment summary / hospital course <button class="sm" onclick="dict('id_s')">🎤</button></label><textarea id="id_s" rows="3"></textarea>
+ <label>Medicines on discharge</label><textarea id="id_m" rows="3" placeholder="One per line, e.g. Moxifloxacin eye drops 1 drop QID x 2 weeks"></textarea>
+ <label>Advice on discharge</label><textarea id="id_a" rows="2"></textarea>
+ <div class="card" style="margin-top:12px"><label style="display:flex;gap:8px;align-items:center;margin:0;color:var(--tx)"><input type="checkbox" id="id_ck" style="width:auto" ${a.charged?'checked':''} onchange="$('#id_ch').style.display=this.checked?'grid':'none'"> <b>Generate final IPD bill (optional)</b></label>
+ <div class="f" id="id_ch" style="display:${a.charged?'grid':'none'};margin-top:8px"><div><label>Room charge per day</label><input id="id_r" type="number" value="${a.rate||WRATE[a.ward]}"></div><div><label>Days of stay</label><input id="id_d" type="number" value="${d}"></div>
+ <div><label>Procedure / surgeon fee</label><input id="id_pf" type="number" value="0"></div><div><label>Pharmacy / consumables</label><input id="id_ph" type="number" value="0"></div><div><label>Other charges</label><input id="id_o" type="number" value="0"></div><div><label>Discount %</label><input id="id_ds" type="number" value="0"></div>
+ <div><label>Paid now</label><input id="id_pd" type="number" value="0"></div><div><label>Method</label><select id="id_pm">${['Cash','Card','Easypaisa','JazzCash','Bank Transfer'].map(x=>`<option>${x}</option>`)}</select></div></div></div>
+ <div class="row" style="margin-top:14px"><button class="p" onclick="disSave('${id}')">Discharge & print slip</button><button onclick="closeM()">Cancel</button></div>`)}
+function disSave(id){const a=DB.ipd.find(x=>x.id==id);if(!$('#id_x').value.trim())return toast('Enter the final diagnosis');
+ Object.assign(a,{status:'Discharged',dis:$('#id_t').value,cond:$('#id_c').value,fu:$('#id_f').value,fdx:$('#id_x').value,proc:$('#id_p').value,sum:$('#id_s').value,meds:$('#id_m').value,adv:$('#id_a').value});
+ if($('#id_ck').checked){const days=+$('#id_d').value||1,r=+$('#id_r').value||0,add=[['Room charges ('+a.ward+') × '+days+' day(s)',r*days],['Procedure / surgeon fee',+$('#id_pf').value||0],['Pharmacy / consumables',+$('#id_ph').value||0],['Other charges',+$('#id_o').value||0]].filter(i=>i[1]>0);
+  let b=DB.bills.find(x=>x.id==a.billId);if(!b){b={id:uid(),no:'B-'+String(DB.bills.length+1).padStart(5,'0'),pid:a.pid,date:today(),items:[],disc:0,total:0,paid:0,method:$('#id_pm').value,comm:0,ipd:a.id};DB.bills.push(b);a.billId=b.id}
+  b.items.push(...add);b.disc=+$('#id_ds').value||0;const sum=b.items.reduce((s,i)=>s+i[1],0);b.total=Math.round(sum-sum*b.disc/100);b.paid=Math.min(b.total,b.paid+(+$('#id_pd').value||0));b.method=$('#id_pm').value}
+ if(a.fu&&!DB.appts.some(x=>x.pid==a.pid&&x.date==a.fu))DB.appts.push({id:uid(),pid:a.pid,date:a.fu,time:'10:00',st:'Booked'});
+ log('IPD discharge '+a.no);save();closeM();render();disSlip(id)}
+
+function admSlip(id){const a=DB.ipd.find(x=>x.id==id),p=pat(a.pid),b=DB.bills.find(x=>x.id==a.billId);
+ doPrint(hdr()+`<h3 style="text-align:center;margin:6px 0">ADMISSION SLIP</h3><table style="width:100%;border-collapse:collapse"><tr><td><b>Admission #</b>: ${a.no}</td><td><b>MRN</b>: ${p.mrn}</td><td><b>Date/Time</b>: ${dtf(a.adm)}</td></tr>
+ <tr><td colspan=2><b>Patient</b>: ${esc(p.name)} (${p.age}/${p.gender})</td><td><b>Phone</b>: ${esc(p.phone)}</td></tr><tr><td colspan=3><b>Address</b>: ${esc(p.addr)}</td></tr>
+ <tr><td><b>Ward</b>: ${esc(a.ward)}</td><td><b>Bed/Room</b>: ${esc(a.bed)||'____'}</td><td><b>Consultant</b>: ${esc(a.doc)}</td></tr><tr><td colspan=2><b>Attendant</b>: ${esc(a.an)||'____________'}</td><td><b>Attendant phone</b>: ${esc(a.ap)||'____________'}</td></tr>
+ <tr><td colspan=3><b>Allergy</b>: ${esc(p.allergy)||'None known'} &nbsp; <b>Chronic</b>: ${(p.chronic||[]).join(', ')||'-'}</td></tr></table>
+ <div class="bx"><b>Admitting diagnosis</b>: ${esc(a.dx)}</div><div class="bx"><b>Reason / planned procedure</b>: ${esc(a.reason)||'-'}</div>
+ ${b?`<table style="width:100%;border-collapse:collapse;margin-top:6px"><tr><th colspan=2 style="text-align:left">Admission charges</th></tr>${b.items.map(i=>`<tr><td>${esc(i[0])}</td><td style="text-align:right">${fmt(i[1])}</td></tr>`).join('')}<tr><td><b>Advance / paid (${b.method})</b></td><td style="text-align:right"><b>${fmt(b.paid)}</b></td></tr></table>`:''}
+ <div class="bx" style="min-height:80px"><b>Consent:</b> I agree to the admission and to the treatment / procedure advised by the doctor. I have been informed of the risks and the expected outcome.<br><br>Signature: ________________ &nbsp; Name: ________________ &nbsp; Relation: ___________ &nbsp; Date: ________</div>
+ <p style="margin-top:20px;text-align:right">Admitting staff signature: ________________</p>`)}
+function disSlip(id){const a=DB.ipd.find(x=>x.id==id),p=pat(a.pid),b=DB.bills.find(x=>x.id==a.billId);
+ const ml=(a.meds||'').split('\n').filter(x=>x.trim());
+ doPrint(hdr()+`<h3 style="text-align:center;margin:6px 0">DISCHARGE SUMMARY</h3><table style="width:100%;border-collapse:collapse"><tr><td><b>Admission #</b>: ${a.no}</td><td><b>MRN</b>: ${p.mrn}</td><td><b>Ward/Bed</b>: ${esc(a.ward)} / ${esc(a.bed)||'-'}</td></tr>
+ <tr><td colspan=2><b>Patient</b>: ${esc(p.name)} (${p.age}/${p.gender})</td><td><b>Phone</b>: ${esc(p.phone)}</td></tr><tr><td><b>Admitted</b>: ${dtf(a.adm)}</td><td><b>Discharged</b>: ${dtf(a.dis)}</td><td><b>Stay</b>: ${stay(a)} day(s)</td></tr>
+ <tr><td colspan=2><b>Consultant</b>: ${esc(a.doc)}</td><td><b>Condition</b>: ${esc(a.cond)}</td></tr></table>
+ <div class="bx"><b>Admitting diagnosis</b>: ${esc(a.dx)}<br><b>Final diagnosis</b>: ${esc(a.fdx)}</div><div class="bx"><b>Procedure performed</b>: ${esc(a.proc)||'-'}</div>
+ <div class="bx"><b>Treatment summary</b>: ${esc(a.sum)||'-'}</div>
+ <div class="bx"><b>Medicines on discharge</b>${ml.length?'<ol style="margin:4px 0 0 18px">'+ml.map(m=>`<li>${esc(m)}</li>`).join('')+'</ol>':': -'}</div>
+ <div class="bx"><b>Advice</b>: ${esc(a.adv)||'-'}<br><b>Follow-up</b>: ${a.fu||'As advised'}. Return immediately for pain, redness, sudden loss of vision, or bleeding.</div>
+ ${b?`<table style="width:100%;border-collapse:collapse;margin-top:6px"><tr><th colspan=2 style="text-align:left">Billing summary</th></tr>${b.items.map(i=>`<tr><td>${esc(i[0])}</td><td style="text-align:right">${fmt(i[1])}</td></tr>`).join('')}<tr><td>Discount</td><td style="text-align:right">${b.disc}%</td></tr><tr><td><b>Total</b></td><td style="text-align:right"><b>${fmt(b.total)}</b></td></tr><tr><td>Paid</td><td style="text-align:right">${fmt(b.paid)}</td></tr><tr><td>Balance due</td><td style="text-align:right">${fmt(b.total-b.paid)}</td></tr></table>`:''}
+ <div style="display:flex;justify-content:space-between;margin-top:34px"><span>Patient / attendant: ______________</span><span>${esc(DB.set.doc)}<br><small>${esc(DB.set.qual)}</small></span></div>`)}
+
+/* ---------- Cloud storage (Firebase Firestore, free Spark plan) ---------- */
+const COLS=['settings','patients','appts','visits','bills','meds','expenses','ipd'];
+const ar=c=>c=='settings'?[DB.set]:DB[c];
+const CL={on:false,ready:false,user:null,unsubs:[],timer:null,snap:{},status:'Not connected'};
+try{CL.on=!!localStorage.getItem('clinic_fb_cfg');CL.snap=JSON.parse(localStorage.getItem('clinic_snap')||'{}')}catch(e){}
+COLS.forEach(c=>CL.snap[c]=CL.snap[c]||{});
+DB.set.id='main';
+function snapSave(){try{localStorage.setItem('clinic_snap',JSON.stringify(CL.snap))}catch(e){}}
+function stamp(){if(!CL.on)return;COLS.forEach(c=>{if(c=='settings')return;ar(c).forEach(d=>{if(CL.snap[c][d.id]!==JSON.stringify(d))d._u=Date.now()})})}
+function setStat(t){if(t)CL.status=t;const c=$('#cl');if(c){c.style.display=CL.on?'inline-block':'none';c.textContent=CL.ready?'☁ Synced':CL.user?'☁ Syncing…':'☁ Offline'}const f=$('#fb_st');if(f)f.textContent=CL.status}
+async function cloudInit(){
+ let cfg;try{cfg=JSON.parse(localStorage.getItem('clinic_fb_cfg')||'null')}catch(e){}
+ if(!cfg){setStat();return}
+ try{
+  const B='https://www.gstatic.com/firebasejs/10.12.2/';
+  const [A,Au,F]=await Promise.all([import(B+'firebase-app.js'),import(B+'firebase-auth.js'),import(B+'firebase-firestore.js')]);
+  CL.Au=Au;CL.F=F;const app=A.initializeApp(cfg);CL.auth=Au.getAuth(app);CL.db=F.getFirestore(app);
+  Au.onAuthStateChanged(CL.auth,u=>{CL.user=u;if(u){CL.status='Signed in as '+u.email;startSync()}else{CL.status='Not signed in. Sign in from Settings.';stopSync()}setStat()});
+ }catch(e){setStat('Could not load Firebase. Check internet connection and config.')}
+}
+function startSync(){stopSync();let left=COLS.length;const F=CL.F;
+ COLS.forEach(col=>{let first=true;
+  CL.unsubs.push(F.onSnapshot(F.collection(CL.db,col),qs=>{
+   let ch=false;
+   qs.docChanges().forEach(x=>{const id=x.doc.id;
+    if(x.type=='removed'){if(col!='settings'){const i=DB[col].findIndex(d=>d.id==id);if(i>=0){DB[col].splice(i,1);ch=true}}delete CL.snap[col][id];return}
+    let c;try{c=JSON.parse(x.doc.data().j)}catch(e){return}
+    const l=ar(col).find(d=>d.id==id);
+    if(!l){if(col=='settings')Object.assign(DB.set,c);else DB[col].push(c);CL.snap[col][id]=JSON.stringify(c);ch=true}
+    else{if((c._u||0)>(l._u||0)){Object.assign(l,c);ch=true}if((c._u||0)>=(l._u||0))CL.snap[col][id]=JSON.stringify(l)}
+   });
+   if(ch){try{localStorage.setItem(K,JSON.stringify(DB))}catch(e){}snapSave();if(!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))render()}
+   if(first){first=false;if(--left==0){CL.ready=true;setStat();push()}}
+  },err=>setStat('Cloud error: '+(err.code||err.message)+'. Check your Firestore rules.')));
+ })}
+function stopSync(){CL.unsubs.forEach(u=>u());CL.unsubs=[];CL.ready=false}
+function pushSoon(){clearTimeout(CL.timer);CL.timer=setTimeout(push,700)}
+async function push(){if(!CL.ready)return;const F=CL.F;let dirty=false;
+ for(const col of COLS){const seen={};
+  for(const d of ar(col)){seen[d.id]=1;const j=JSON.stringify(d);if(CL.snap[col][d.id]===j)continue;
+   if(j.length>950000){toast('A record is too large for cloud sync. Remove some attached images.');continue}
+   try{await F.setDoc(F.doc(CL.db,col,d.id),{_u:d._u||0,j});CL.snap[col][d.id]=j;dirty=true}catch(e){setStat('Cloud error: '+(e.code||e.message))}}
+  if(col!='settings')for(const id in CL.snap[col])if(!seen[id]){try{await F.deleteDoc(F.doc(CL.db,col,id));delete CL.snap[col][id];dirty=true}catch(e){}}}
+ if(dirty)snapSave();setStat()}
+function fbSaveCfg(){const c={};$('#fb_cfg').value.replace(/["']?(\w+)["']?\s*:\s*["']([^"']+)["']/g,(m,k,v)=>{c[k]=v});
+ if(!c.apiKey||!c.projectId)return toast('Paste the full firebaseConfig from the Firebase console');
+ localStorage.setItem('clinic_fb_cfg',JSON.stringify(c));toast('Saved. Reloading…');setTimeout(()=>location.reload(),700)}
+async function fbAuth(m){const e=$('#fb_e').value.trim(),p=$('#fb_p').value;if(!CL.auth)return toast('Save the Firebase config first');if(!e||!p)return toast('Enter email and password');
+ try{m=='up'?await CL.Au.createUserWithEmailAndPassword(CL.auth,e,p):await CL.Au.signInWithEmailAndPassword(CL.auth,e,p);toast('Signed in')}catch(x){toast(String(x.code||x.message).replace('auth/','').replace(/-/g,' '))}}
+function fbOut(){if(CL.auth)CL.Au.signOut(CL.auth)}
+function fbOff(){if(confirm('Disconnect cloud storage on this device? Local data stays.')){localStorage.removeItem('clinic_fb_cfg');localStorage.removeItem('clinic_snap');location.reload()}}
+const RULES="rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    match /{document=**} {\n      allow read, write: if request.auth != null\n        && request.auth.token.email in ['owner@example.com','reception@example.com'];\n    }\n  }\n}";
+const cloudCard=()=>{let cfg='';try{cfg=localStorage.getItem('clinic_fb_cfg')||''}catch(e){}
+ return `<div class="card"><b>☁ Cloud storage (free – Google Firebase)</b>
+ <p style="color:var(--mu);margin:6px 0">Status: <span id="fb_st">${esc(CL.status)}</span></p>
+ <label>Firebase config (paste the firebaseConfig block)</label><textarea id="fb_cfg" rows="4" placeholder='apiKey: "...", authDomain: "...", projectId: "...", appId: "..."'>${esc(cfg)}</textarea>
+ <div class="row" style="margin-top:8px"><button class="p" onclick="fbSaveCfg()">Save & connect</button>${CL.on?`<button class="sm" onclick="fbOff()">Disconnect</button>`:''}</div>
+ <div class="f" style="margin-top:10px"><div><label>Staff email</label><input id="fb_e" type="email" autocomplete="username"></div><div><label>Password (min 6 characters)</label><input id="fb_p" type="password" autocomplete="current-password"></div></div>
+ <div class="row" style="margin-top:8px"><button class="p" onclick="fbAuth('in')">Sign in</button><button onclick="fbAuth('up')">Create account</button><button onclick="fbOut()">Sign out</button></div>
+ <details style="margin-top:12px"><summary>One-time setup steps</summary><ol style="margin:8px 0 0 18px;line-height:1.7"><li>Open console.firebase.google.com and create a project (Spark plan, no card needed).</li><li>Build → Firestore Database → Create database (production mode).</li><li>Build → Authentication → Get started → enable Email/Password.</li><li>Project settings → Your apps → Web (&lt;/&gt;) → copy the firebaseConfig and paste it above.</li><li>Create your account here, then open Firestore → Rules and paste the rules below with your real emails. Publish.</li></ol>
+ <pre style="white-space:pre-wrap;background:rgba(0,0,0,.08);padding:10px;border-radius:10px;font-size:12px;margin-top:8px">${esc(RULES)}</pre></details></div>`};
+/* ---------- shortcuts ---------- */
+document.addEventListener('keydown',e=>{if(!e.ctrlKey)return;const k=e.key.toLowerCase();if(k=='n'){e.preventDefault();nav('pat');patForm()}else if(k=='b'){e.preventDefault();billForm()}});
+render();
+cloudInit();
+</script>
+</body>
+</html>
